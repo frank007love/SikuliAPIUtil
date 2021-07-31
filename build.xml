@@ -1,0 +1,30 @@
+<project name="SikuliAPIUtil" default="build" basedir="./">
+	<import file="../BuildCommon/commonInclude.xml"/>
+	<property name="common.libs" value="../CommonLibraries/libs" />
+	
+	<property name="debug" value="off" />
+	<property name="optimize" value="on" />
+	<property name="test_output" value="off" />
+
+	<path id="classPath">
+		<fileset dir="${common.libs}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${basedir}">
+			<include name="libs/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="build">
+		<antcall target="compile" />
+		<antcall target="jar" />
+	</target>
+
+	<target name="compile" depends="clear, prepare">
+		<javac executable="C:/Program Files/Java/jdk1.6.0_31/bin/javac" debug="${debug}" deprecation="${optimize}"  destdir="${dir.build}" encoding="UTF-8">
+			<classpath refid="classPath" />
+			<src path="src" />
+			<include name="**/*.java"/>
+		</javac>
+	</target>
+</project>
